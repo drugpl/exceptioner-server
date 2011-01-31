@@ -10,7 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110130234309) do
+ActiveRecord::Schema.define(:version => 20110131003714) do
+
+  create_table "issues", :force => true do |t|
+    t.string   "name",       :null => false
+    t.text     "message"
+    t.text     "backtrace"
+    t.integer  "project_id", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "api_token",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
@@ -42,5 +58,7 @@ ActiveRecord::Schema.define(:version => 20110130234309) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  add_foreign_key "issues", ["project_id"], "projects", ["id"], :name => "issues_project_id_fkey"
 
 end
