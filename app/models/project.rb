@@ -1,8 +1,6 @@
 require 'token_generator'
 
 class Project < ActiveRecord::Base
-  include TokenGenerator
-
   has_many :issues
 
   validates_presence_of :name
@@ -12,6 +10,6 @@ class Project < ActiveRecord::Base
   before_create :assign_api_token
 
   def assign_api_token
-    self.api_token = generate_token
+    self.api_token = TokenGenerator.generate_token
   end
 end

@@ -1,4 +1,11 @@
 ExceptionerServer::Application.routes.draw do
+  resources :issues,
+    :controller => 'api/issues',
+    :only => :create,
+    :format => :json,
+    :path => '/api/:version/issues',
+    :constraints => { :version => /\d+\.\d+/ }
+
   root :to => 'home#index'
 
   devise_for :users
