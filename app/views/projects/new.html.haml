@@ -1,0 +1,7 @@
+= form_for [@project.user, @project] do |f|
+  %p
+    %b
+      = f.label "Project name"
+      = f.text_field :name
+      = f.submit "Save project"
+= link_to "Back", projects_path(current_user)

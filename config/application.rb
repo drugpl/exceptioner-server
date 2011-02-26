@@ -38,5 +38,7 @@ module ExceptionerServer
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.secret_token = "5c9190f1dff9b2e685c146ed02f7066e030000b492dc0df588dfc3342435e6326e8e0b5d81265ce9e13e140b70e5e9ca6c26526b380716ba6a8c9944fd63e15a"
   end
 end

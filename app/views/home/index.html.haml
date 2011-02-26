@@ -1,2 +1,8 @@
 %h1 Home#index
-%p Find me in app/views/home/index.html.haml
+
+- if user_signed_in?
+  = link_to "Sign out", destroy_user_session_path
+  = link_to "My projects", projects_path
+- else
+  = link_to "Sign in", new_user_session_path
+  = link_to "Sign up", new_user_registration_path
