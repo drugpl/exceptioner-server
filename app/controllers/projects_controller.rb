@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 
   def create
     if current_user.projects.create!(params[:project])
-      redirect_to projects_path
+      redirect_to user_projects_path(current_user)
     else
       render :new
     end

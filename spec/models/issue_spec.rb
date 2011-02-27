@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'digest/sha1'
 
 describe Issue do
   before do
@@ -16,4 +17,10 @@ describe Issue do
     @issue.save
     @issue.should have(1).error_on(:project)
   end
+
+  it "should be hashed before save" do
+    @issue.get_fingerprint
+    @issue.fingerprint.should_not eq(nil)
+  end
+
 end

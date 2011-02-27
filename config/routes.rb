@@ -1,22 +1,20 @@
 ExceptionerServer::Application.routes.draw do
 
-
-  resources :projects
+  resources :issues,
+        :controller => 'api/issues',
+        :only => :create,
+        :format => :json,
+        :path => '/api/:version/issues',
+        :constraints => { :version => /\d+\.\d+/ }
 
   root :to => 'home#index'
 
   devise_for :users
 
   resources :users do
-    resources :projects do
-      resources :issues,
-        :controller => 'api/issues',
-        :only => :create,
-        :format => :json,
-        :path => '/api/:version/issues',
-        :constraints => { :version => /\d+\.\d+/ }
-    end
+    resources :projects
   end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

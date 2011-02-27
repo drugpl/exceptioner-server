@@ -10,7 +10,7 @@ describe Project do
     @project.save
     @project.should have(1).error_on(:name)
   end
-  
+
   it "should have unique name" do
     Factory(:project, :name => @project.name)
     @project.save
