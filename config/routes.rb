@@ -11,8 +11,8 @@ ExceptionerServer::Application.routes.draw do
 
   devise_for :users
 
-  resources :users do
-    resources :projects
+  scope "user" do
+    resources :projects, :as => "user_projects"
   end
 
   # The priority is based upon order of creation:
