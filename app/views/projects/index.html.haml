@@ -1,6 +1,13 @@
 %h2 Your projects:
 %ul
+  = will_paginate @projects
   - @projects.each do |project|
     %p
-      %li= link_to project.name, [current_user, project]
-= link_to "New project", new_user_project_path(current_user)
+      %li
+        = link_to project.name, project
+        = link_to "Delete", project_path(project), :confirm => "Are you sure? All data will be lost.", :method => :delete
+        = link_to "Edit", edit_project_path(project)
+  = will_paginate @projects
+%br/
+= link_to "New project", new_project_path(current_user)
+= link_to "Home", root_path

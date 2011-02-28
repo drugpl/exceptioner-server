@@ -1,0 +1,6 @@
+= form_for @project do |f|
+  %p
+    %b
+      = f.label "Project name"
+      = f.text_field :name
+      = f.submit "Save project"

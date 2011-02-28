@@ -2,7 +2,7 @@ require 'token_generator'
 
 class Project < ActiveRecord::Base
   belongs_to :user
-  has_many :issues
+  has_many :issues, :dependent => :destroy
 
   validates_presence_of :name
   validates_uniqueness_of :name
