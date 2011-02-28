@@ -4,6 +4,4 @@
   %b Issues:
   - @issues.each do |issue|
     %p
-      %b= issue.name
-      %b= issue.message
-      %b= issue.backtrace
+      %b= link_to issue.name, project_issue_path(@project, issue)

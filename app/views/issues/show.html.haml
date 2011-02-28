@@ -1,0 +1,10 @@
+%h2= "Project: #{@project.name}"
+
+%h3= "Issue: #{@issue.name}"
+%p= "Exception: #{@issue.exception}"
+%p= "Message #{@issue.message}"
+%p= "ENV: #{@issue.env}"
+%p= "Transports: #{@issue.transports}"
+%p= "Backtrace: #{@issue.backtrace}"
+
+%br= link_to "Back", @project
