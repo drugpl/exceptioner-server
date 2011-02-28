@@ -7,3 +7,4 @@ config/initializers/secret_token.rb
 config/deploy.rb
 *.swo
 *.swp
+.rvmrc
