@@ -3,17 +3,16 @@ include HelperMethods
 
 feature "Projects" do
   background do
-    user = Factory(:user)
-    project = Factory(:project, :user_id => user)
+    @project = @website.has(:project, :user => @user.record)
   end
 
-  scenario "Show projets only to signed in users" do
-    visit projects_path
-    page.should have_content("Sign in")
-    visit project_path(1)
-    page.should have_content("Sign in")
-    sign_in
-    visit projects_path
-    current_path.should == projects_path
+  scenario "should be visible only to authenticated users" do
+    @user.visit(projects_path)
+    @user.should_see("Sign in")
+    @user.visit(project_path(@project))
+    @user.should_see("Sign in")
+    @user.sign_in
+    @user.visit(projects_path)
+    @user.should_not_see("Sign in")
   end
 end
