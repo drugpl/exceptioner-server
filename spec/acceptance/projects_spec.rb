@@ -22,7 +22,7 @@ feature "Projects" do
     end
 
     scenario "should be accesible only by owner" do
-      pending "FIXME"
+      #pending "FIXME"
       @bob = @website.has(:user)
       @user.visit(project_path(@project))
       @user.should_see(@project.name)

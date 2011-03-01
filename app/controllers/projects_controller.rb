@@ -11,8 +11,13 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
-    @issues = @project.issues
+    begin
+      @project = current_user.projects.find(params[:id])
+      @issues = @project.issues
+    rescue
+      redirect_to root_path,
+                  :notice => "You own no such project"
+    end
   end
 
   def create
@@ -24,11 +29,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
   end
 
   def update
-    project = Project.find(params[:id])
+    project = current_user.projects.find(params[:id])
 
     if project.update_attributes(params[:project])
       redirect_to projects_path(current_user)
@@ -38,7 +43,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    project = Project.find(params[:id])
+    project = current_user.projects.find(params[:id])
     if project
       project.destroy
     else
