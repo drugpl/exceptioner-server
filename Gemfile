@@ -16,6 +16,7 @@ group :development, :test do
   gem "rspec-rails", ">= 2.4.1"
   gem "factory_girl_generator", ">= 0.0.1"
   gem "capybara", :git => 'git://github.com/jnicklas/capybara.git'
+  gem "launchy"
   if RUBY_VERSION < "1.9"
     gem "ruby-debug"
   else
