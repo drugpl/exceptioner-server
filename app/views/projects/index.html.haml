@@ -1,13 +1,13 @@
-%h2 My projects:
+%h2= t('projects.owned')
 %ul
   = will_paginate @projects
   - @projects.each do |project|
     %p
       %li
         = link_to project.name, project
-        = link_to "Delete", project_path(project), :confirm => "Are you sure? All data will be lost.", :method => :delete
-        = link_to "Edit", edit_project_path(project)
+        = link_to t('projects.delete'), project_path(project), :confirm => t('confirmations.delete'), :method => :delete
+        = link_to t('projects.edit'), edit_project_path(project)
   = will_paginate @projects
 %br/
-= link_to "New project", new_project_path(current_user)
-= link_to "Home", root_path
+= link_to t('projects.new'), new_project_path(current_user)
+= link_to t(:home), root_path

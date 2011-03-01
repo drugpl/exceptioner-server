@@ -1,6 +1,6 @@
 = form_for @project do |f|
   %p
     %b
-      = f.label "Project name"
+      = f.label Project.human_attribute_name(:name)
       = f.text_field :name
-      = f.submit "Save project"
+      = f.submit t('projects.save')

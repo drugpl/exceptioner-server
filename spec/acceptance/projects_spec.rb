@@ -36,37 +36,29 @@ feature "Projects" do
       @user.visit(edit_project_path(@project))
       @user.should_see(@project.name)
       @user.fill_in("project_name", :with => new_name)
-      @user.click("Save project")
+      @user.click_translated("projects.save")
       @user.should_see(new_name)
       unowned_project = @website.has(:project, :user => @bob)
       @user.visit(edit_project_path(unowned_project))
       @user.should_not_see(unowned_project.name)
     end
 
-    scenario "should be deleteable by owner" do
+    scenario "should be deletable by owner" do
       @bob = @website.has(:user)
       @user.visit(projects_path)
-      @user.click("Delete")
+      @user.click_translated('projects.delete')
       @user.should_not_see(@project.name)
     end
 
     scenario "should create new project" do
       @user.visit(projects_path)
-      @user.should_see("My projects:")
-      @user.click("New project")
-      @user.should_see("Project name")
+      @user.should_see_translated('projects.owned')
+      @user.click_translated('projects.new')
+      @user.should_see(Project.human_attribute_name(:name))
       @user.fill_in("project_name", :with => "My very first project")
-      @user.click("Save project")
+      @user.click_translated('projects.save')
       @user.should_see("My very first project")
     end
 
-    scenario "should not have empty name" do
-      @user.visit(projects_path)
-      @user.should_see("My projects:")
-      @user.click("New project")
-      @user.should_see("Project name")
-      @user.click("Save project")
-      @user.should_see("Project name")
-    end
   end
 end
