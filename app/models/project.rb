@@ -10,6 +10,8 @@ class Project < ActiveRecord::Base
 
   before_validation :assign_api_token, :on => :create
 
+  attr_accessible :name
+
   protected
   def assign_api_token
     self.api_token = TokenGenerator.generate_token

@@ -11,13 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    begin
-      @project = current_user.projects.find(params[:id])
-      @issues = @project.issues
-    rescue
-      redirect_to root_path,
-                  :notice => "You own no such project"
-    end
+    @project = current_user.projects.find(params[:id])
   end
 
   def create

@@ -2,6 +2,6 @@
 %p= "Api Token:  #{@project.api_token}"
 %p
   %b Issues:
-  - @issues.each do |issue|
+  - @project.issues.each do |issue|
     %p
       %b= link_to issue.name, project_issue_path(@project, issue)
