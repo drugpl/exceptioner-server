@@ -6,10 +6,11 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
-  validates_presence_of :api_token, :unless => :new_record?
+  validates_presence_of :api_token
 
-  before_create :assign_api_token
+  before_validation :assign_api_token, :on => :create
 
+  protected
   def assign_api_token
     self.api_token = TokenGenerator.generate_token
   end
