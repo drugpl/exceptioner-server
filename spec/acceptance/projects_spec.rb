@@ -8,11 +8,11 @@ feature "Projects" do
 
   scenario "should be visible only to authenticated users" do
     @user.visit(projects_path)
-    @user.should_see("Sign in")
+    @user.should_see_translated("sign_in")
     @user.visit(project_path(@project))
-    @user.should_see("Sign in")
+    @user.should_see_translated("sign_in")
     @user.sign_in
     @user.visit(projects_path)
-    @user.should_not_see("Sign in")
+    @user.should_not_see_translated("sign_in")
   end
 end
