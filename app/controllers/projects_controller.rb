@@ -39,12 +39,11 @@ class ProjectsController < ApplicationController
 
   def destroy
     project = current_user.projects.find(params[:id])
-    if project
-      project.destroy
+    project.destroy
+    unless Project.exists?(project)
+      redirect_to projects_path(current_user), :notice => t('projects.actions.destroy.successful')
     else
-      redirect_to projects_path(current_user), :notice => 'No such project'
+      redirect_to projects_path(current_user), :alert => t('projects.actions.destroy.failed')
     end
-
-    redirect_to projects_path(current_user)
   end
 end

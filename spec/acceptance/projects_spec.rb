@@ -60,5 +60,18 @@ feature "Projects" do
       @user.should_see("My very first project")
     end
 
+    scenario "should display an error after failed destroy" do
+      Project.stub!(:exists?).and_return(true)
+      @user.visit(projects_path)
+      @user.click_translated('projects.delete')
+      @user.should_see_translated('projects.actions.destroy.failed')
+    end
+
+    scenario "should display a message after successful destroy" do
+      @user.visit(projects_path)
+      @user.click_translated('projects.delete')
+      @user.should_see_translated('projects.actions.destroy.successful')
+    end
+
   end
 end

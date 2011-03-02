@@ -13,6 +13,10 @@ en:
     edit: Edit
     delete: Delete
     save: Save project
+    actions:
+      destroy:
+        successful: Project was successfully destroyed
+        failed: Cannot destroy a project
 
   confirmations:
     delete: "Are you sure? All data will be lost."
