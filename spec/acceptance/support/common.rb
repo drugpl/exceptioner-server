@@ -50,6 +50,11 @@ module Test
       self
     end
 
+    def fill_in_translated(*args)
+      target = args.unshift
+      browser.fill_in(I18n.t(target), *args)
+    end
+
     def visit(path)
       browser.visit(path)
       self
@@ -57,9 +62,16 @@ module Test
 
     def sign_in
       browser.visit browser.new_user_session_path
-      browser.fill_in("Email", :with => record.email)
-      browser.fill_in("Password", :with => record.password)
-      browser.click_link_or_button("Sign in")
+      browser.fill_in(I18n.t('activerecord.attributes.user.email'), :with => record.email)
+      browser.fill_in(I18n.t('activerecord.attributes.user.password'), :with => record.password)
+      browser.click_link_or_button(I18n.t('sign_in'))
+      self
+    end
+
+    def create_project(args)
+      browser.visit browser.new_project_path(self)
+      browser.fill_in(I18n.t('activerecord.attributes.project.name'), :with => args[:name])
+      browser.click_link_or_button(I18n.t('projects.add_user'))
       self
     end
 
@@ -107,6 +119,9 @@ module Test
 
     def has(factory, options = {})
       Factory(factory, options)
+    end
+    def build(factory, options = {})
+      Factory.build(factory, options)
     end
   end
 end

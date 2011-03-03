@@ -6,6 +6,12 @@ en:
     attributes:
       project:
         name: Project name
+      user:
+        name: User name
+        email: Email
+        password: Password
+        role:
+          watcher: Watcher
 
   projects:
     owned: My projects
@@ -13,6 +19,7 @@ en:
     edit: Edit
     delete: Delete
     save: Save project
+    add_user: Add user
     actions:
       destroy:
         successful: Project was successfully destroyed
@@ -21,7 +28,12 @@ en:
   confirmations:
     delete: "Are you sure? All data will be lost."
 
+  users:
+    new: New user
+    watchers: Watchers
+
   sign_in: Sign in
   sign_out: Sign out
   sign_up: Sign up
-
+  back: Back
+  home: Home

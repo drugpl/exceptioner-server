@@ -1,5 +1,5 @@
-%h2 You're creating new project.
+%h2= t('projects.new')
 
 = render 'form'
 
-= link_to "Back", projects_path(current_user)
+= link_to t('back'), projects_path(current_user)

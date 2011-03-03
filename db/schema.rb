@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110228233753) do
+ActiveRecord::Schema.define(:version => 20110302205216) do
 
   create_table "issues", :force => true do |t|
     t.string   "name",        :null => false
@@ -26,12 +26,18 @@ ActiveRecord::Schema.define(:version => 20110228233753) do
     t.text     "transports"
   end
 
+  create_table "project_users", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "api_token",  :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id",    :null => false
   end
 
   create_table "slugs", :force => true do |t|
@@ -67,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20110228233753) do
 
   add_foreign_key "issues", ["project_id"], "projects", ["id"], :name => "issues_project_id_fkey"
 
-  add_foreign_key "projects", ["user_id"], "users", ["id"], :name => "projects_user_id_fkey"
+  add_foreign_key "project_users", ["project_id"], "projects", ["id"], :name => "project_users_project_id_fkey"
+  add_foreign_key "project_users", ["user_id"], "users", ["id"], :name => "project_users_user_id_fkey"
 
 end

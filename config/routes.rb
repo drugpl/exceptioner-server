@@ -12,9 +12,12 @@ ExceptionerServer::Application.routes.draw do
   devise_for :users
 
   resources :projects do
-    resources :issues
+    resources :users
   end
 
+  resources :projects do
+    resources :issues
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

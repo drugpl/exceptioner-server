@@ -3,17 +3,17 @@ include HelperMethods
 
 feature "Projects" do
   background do
-    @project = @website.has(:project, :user => @user.record)
+    @project = @website.has(:project, :users => [@user.record])
   end
 
   scenario "should be visible only to authenticated users" do
     @user.visit(projects_path)
-    @user.should_see_translated("sign_in")
+    @user.should_see_translated('sign_in')
     @user.visit(project_path(@project))
-    @user.should_see_translated("sign_in")
+    @user.should_see_translated('sign_in')
     @user.sign_in
     @user.visit(projects_path)
-    @user.should_not_see_translated("sign_in")
+    @user.should_not_see_translated('sign_in')
   end
 
   context "visited by signed in user" do
@@ -25,7 +25,7 @@ feature "Projects" do
       @bob = @website.has(:user)
       @user.visit(project_path(@project))
       @user.should_see(@project.name)
-      unowned_project = @website.has(:project, :user => @bob)
+      unowned_project = @website.has(:project, :users => [@bob])
       @user.visit(project_path(unowned_project))
       @user.should_not_see(unowned_project.name)
     end
@@ -36,9 +36,9 @@ feature "Projects" do
       @user.visit(edit_project_path(@project))
       @user.should_see(@project.name)
       @user.fill_in("project_name", :with => new_name)
-      @user.click_translated("projects.save")
+      @user.click_translated('projects.save')
       @user.should_see(new_name)
-      unowned_project = @website.has(:project, :user => @bob)
+      unowned_project = @website.has(:project, :users => [@bob])
       @user.visit(edit_project_path(unowned_project))
       @user.should_not_see(unowned_project.name)
     end
@@ -54,7 +54,7 @@ feature "Projects" do
       @user.visit(projects_path)
       @user.should_see_translated('projects.owned')
       @user.click_translated('projects.new')
-      @user.should_see(Project.human_attribute_name(:name))
+      @user.should_see_translated('activerecord.attributes.project.name')
       @user.fill_in("project_name", :with => "My very first project")
       @user.click_translated('projects.save')
       @user.should_see("My very first project")
@@ -73,5 +73,24 @@ feature "Projects" do
       @user.should_see_translated('projects.actions.destroy.failed')
     end
 
+    context "created project" do
+      before(:each) do
+        @user.create_project(:name => "My very first project")
+      end
+
+      scenario "owner should be able to add/remove watcher to/from the project" do
+        @bob = @website.has(:user)
+        @user.visit(project_path(@project))
+        @user.should_see_translated('projects.add_user')
+        @user.click_translated('projects.add_user')
+        @user.should_see(@project.name)
+        @user.should_see_translated('user.email')
+        @user.fill_in("user_email", :with => @bob.email)
+        @user.click_translated('projects.add_user')
+        @user.should_see(@project.name, @bob.email)
+        @user.should_see_translated('users.watchers')
+        @user.click(@bob.email)
+      end
+    end
   end
 end
