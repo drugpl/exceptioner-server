@@ -1,22 +1,20 @@
 require 'digest/sha1'
 
 class Issue < ActiveRecord::Base
-  belongs_to :project
+  FINGERPRINT_ATTRIBUTES =
+    %w(name exception message backtrace controller env transports)
 
-  before_create :get_fingerprint
+  belongs_to :project
 
   validates_presence_of :name, :project
 
   attr_protected :project_id
 
-  def get_fingerprint
-    self.fingerprint = Digest::SHA1.hexdigest( self.name.to_s +
-                                               self.exception.to_s +
-                                               self.message.to_s +
-                                               self.backtrace.to_s +
-                                               self.controller.to_s +
-                                               self.env.to_s +
-                                               self.transports.to_s
-                                             )
+  before_create  :generate_fingerprint
+
+  protected
+  def generate_fingerprint
+    attr_values = FINGERPRINT_ATTRIBUTES.collect { |attr| self[attr].to_s }
+    self.fingerprint = Digest::SHA1.hexdigest(attr_values.join)
   end
 end

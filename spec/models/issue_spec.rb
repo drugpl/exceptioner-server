@@ -18,9 +18,24 @@ describe Issue do
     @issue.should have(1).error_on(:project)
   end
 
-  it "should be hashed before save" do
-    @issue.get_fingerprint
-    @issue.fingerprint.should_not eq(nil)
-  end
+  context "#fingerpint" do
+    it "should be generated before save" do
+      @issue.save
+      @issue.fingerprint.should_not == nil
+    end
 
+    it "should be identical for indentical attributes" do
+      params = { :name => "RuntimeError", :message => "EOF" }
+      @issue.update_attributes(params)
+      duplicate = Factory(:issue, params)
+      @issue.fingerprint.should == duplicate.fingerprint
+    end
+
+    it "should be different for different attributes" do
+      params = { :name => "RuntimeError", :message => "EOF" }
+      @issue.update_attributes(params)
+      almost_duplicate = Factory(:issue, params.except(:message))
+      @issue.fingerprint.should_not == almost_duplicate.fingerprint
+    end
+  end
 end
