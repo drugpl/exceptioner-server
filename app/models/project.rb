@@ -4,9 +4,8 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :issues, :dependent => :destroy
 
-  validates_presence_of :name
+  validates_presence_of :name, :api_token
   validates_uniqueness_of :name
-  validates_presence_of :api_token
 
   before_validation :assign_api_token, :on => :create
 

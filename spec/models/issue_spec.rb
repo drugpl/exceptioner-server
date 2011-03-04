@@ -18,10 +18,15 @@ describe Issue do
     @issue.should have(1).error_on(:project)
   end
 
-  context "#fingerpint" do
+  it "should require fingerprint" do
+    @issue.should be_valid
+    @issue.fingerprint.should be_present
+  end
+
+  context "#fingeprint" do
     it "should be generated before save" do
       @issue.save
-      @issue.fingerprint.should_not == nil
+      @issue.fingerprint.should be_present
     end
 
     it "should be identical for indentical attributes" do
