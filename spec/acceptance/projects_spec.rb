@@ -21,6 +21,17 @@ feature "Projects" do
       @user.sign_in
     end
 
+    scenario "should be able to create a new project" do
+      project_name = "Test creating projects"
+      @user.visit(projects_path)
+      @user.should_see_translated('projects.new')
+      @user.click_translated('projects.new')
+      @user.should_see_translated('activerecord.attributes.project.name')
+      @user.fill_in_translated('activerecord.attributes.project.name', :with => project_name)
+      @user.click_translated('projects.save')
+      @user.shoud_see(project_name)
+    end
+
     scenario "should be accesible only by owner" do
       @bob = @website.has(:user)
       @user.visit(project_path(@project))

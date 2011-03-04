@@ -51,7 +51,7 @@ module Test
     end
 
     def fill_in_translated(*args)
-      target = args.unshift
+      target = args.shift
       browser.fill_in(I18n.t(target), *args)
     end
 
