@@ -90,6 +90,7 @@ feature "Projects" do
       end
 
       scenario "owner should be able to add/remove watcher to/from the project" do
+        pending("will do it in a moment")
         @bob = @website.has(:user)
         @user.visit(project_path(@project))
         @user.should_see_translated('projects.add_user')

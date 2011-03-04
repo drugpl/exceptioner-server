@@ -69,9 +69,9 @@ module Test
     end
 
     def create_project(args)
-      browser.visit browser.new_project_path(self)
+      browser.visit browser.new_project_path(self.record)
       browser.fill_in(I18n.t('activerecord.attributes.project.name'), :with => args[:name])
-      browser.click_link_or_button(I18n.t('projects.add_user'))
+      browser.click_link_or_button(I18n.t('projects.save'))
       self
     end
 
