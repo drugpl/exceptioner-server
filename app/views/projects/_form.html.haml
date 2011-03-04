@@ -1,6 +1,6 @@
 = form_for @project do |f|
   %p
     %b
-      = f.label t('activerecord.attributes.project.name')
+      = f.label :name, t('activerecord.attributes.project.name')
       = f.text_field :name
       = f.submit t('projects.save')

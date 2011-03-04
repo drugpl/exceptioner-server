@@ -29,7 +29,7 @@ feature "Projects" do
       @user.should_see_translated('activerecord.attributes.project.name')
       @user.fill_in_translated('activerecord.attributes.project.name', :with => project_name)
       @user.click_translated('projects.save')
-      @user.shoud_see(project_name)
+      @user.should_see(project_name)
     end
 
     scenario "should be accesible only by owner" do
