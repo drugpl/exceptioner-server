@@ -1,22 +1,20 @@
-require 'digest/sha1'
+require 'fingerprint_generator'
 
 class Issue < ActiveRecord::Base
+  FINGERPRINT_ATTRIBUTES =
+    %w(name exception message backtrace controller env transports)
+
   belongs_to :project
 
-  before_create :get_fingerprint
+  validates_presence_of :name, :project, :fingerprint
 
-  validates_presence_of :name, :project
+  before_validation :assign_fingerprint, :on => :create
 
   attr_protected :project_id
 
-  def get_fingerprint
-    self.fingerprint = Digest::SHA1.hexdigest( self.name.to_s +
-                                               self.exception.to_s +
-                                               self.message.to_s +
-                                               self.backtrace.to_s +
-                                               self.controller.to_s +
-                                               self.env.to_s +
-                                               self.transports.to_s
-                                             )
+  protected
+  def assign_fingerprint
+    attr_values = FINGERPRINT_ATTRIBUTES.collect { |attr| self[attr].to_s }
+    self.fingerprint = FingerprintGenerator.generate_fingerprint(*attr_values)
   end
 end
