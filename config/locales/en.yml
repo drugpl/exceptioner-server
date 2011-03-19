@@ -9,6 +9,7 @@ en:
     attributes:
       project:
         name: Project name
+        api_token: Api token
       user:
         name: User name
         email: Email
@@ -29,6 +30,7 @@ en:
     delete: Delete
     save: Save project
     add_user: Add user
+    remove_user: Remove user
     watchers: Watchers
     actions:
       destroy:
@@ -50,6 +52,9 @@ en:
       add_user:
         successful: User successfully added as a watcher
         failed: Cannot add user as a watcher
+      remove_user:
+        successful: User successfully removed from the project
+        failed: Cannot remove user form the project
   sign_in: Sign in
   sign_out: Sign out
   sign_up: Sign up

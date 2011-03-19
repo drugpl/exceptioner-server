@@ -17,5 +17,10 @@ class ProjectUsersController < ApplicationController
     end
   end
   def destroy
+    @project_user = ProjectUser.where(:project_id => current_user.projects).find(params[:project_id])
+    @project = @project_user.project
+    @project_user.destroy
+    flash[:notice] = t('project_users.actions.remove_user.successful')
+    redirect_to @project
   end
 end
