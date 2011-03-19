@@ -84,23 +84,18 @@ feature "Projects" do
       @user.should_see_translated('projects.actions.destroy.failed')
     end
 
-    context "created project" do
-      before(:each) do
-        @user.create_project(:name => "My very first project")
-      end
 
-      scenario "owner should be able to add/remove watcher to/from the project" do
-        @bob = @website.has(:user)
-        @user.visit(project_path(@project))
-        @user.should_see_translated('projects.add_user')
-        @user.click_translated('projects.add_user')
-        @user.should_see(@project.name)
-        @user.should_see_translated('activerecord.attributes.user.email')
-        @user.fill_in("project_user_email", :with => @bob.email)
-        @user.click_translated('projects.add_user')
-        @user.should_see(@project.name, @bob.email)
-        @user.should_see_translated('users.watchers')
-      end
+    scenario "owner should be able to add/remove watcher to/from the project" do
+      @bob = @website.has(:user)
+      @user.visit(project_path(@project))
+      @user.should_see_translated('projects.add_user')
+      @user.click_translated('projects.add_user')
+      @user.should_see(@project.name)
+      @user.should_see_translated('activerecord.attributes.user.email')
+      @user.fill_in("project_user_email", :with => @bob.email)
+      @user.click_translated('projects.add_user')
+      @user.should_see(@project.name, @bob.email)
+      @user.should_see_translated('users.watchers')
     end
   end
 end
