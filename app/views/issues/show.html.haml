@@ -1,10 +1,10 @@
-%h2= "Project: #{@project.name}"
+%h2= t('activerecord.project')+" #{@project.name}"
 
-%h3= "Issue: #{@issue.name}"
-%p= "Exception: #{@issue.exception}"
-%p= "Message #{@issue.message}"
-%p= "ENV: #{@issue.env}"
-%p= "Transports: #{@issue.transports}"
-%p= "Backtrace: #{@issue.backtrace}"
+%h3= t('activerecord.issue')+" #{@issue.name}"
+%p= t('activerecord.issue.attributes.exception')+" #{@issue.exception}"
+%p= t('activerecord.issue.attributes.message')+ " #{@issue.message}"
+%p= t('activerecord.issue.attributes.env')+" #{@issue.env}"
+%p= t('activerecord.issue.attributes.transports')+" #{@issue.transports}"
+%p= t('activerecord.issue.attributes.backtrace')+" #{@issue.backtrace}"
 
-%br= link_to "Back", @project
+%br= link_to t('back'), @project

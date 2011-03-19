@@ -5,6 +5,7 @@ en:
   activerecord:
     project: Project
     issue: Issue
+    transport: Trasport
     attributes:
       project:
         name: Project name
@@ -14,6 +15,12 @@ en:
         password: Password
         role:
           watcher: Watcher
+      issue:
+        exception: Exception
+        message: Message
+        env: ENV
+        backtrace: Backtrace
+        transports: Transports
 
   projects:
     owned: My projects
