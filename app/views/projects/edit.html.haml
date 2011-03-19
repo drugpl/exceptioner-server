@@ -1,5 +1,5 @@
-%h2= "You're editing #{@project.name}"
+%h2= t('projects.actions.edit') + " #{@project.name}"
 
 = render 'form'
 
-= link_to 'Back', projects_path(current_user)
+= link_to t('back'), projects_path(current_user)
