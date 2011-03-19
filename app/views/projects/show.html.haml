@@ -1,5 +1,10 @@
 %h2= "Project #{@project.name}"
 %p= "Api Token:  #{@project.api_token}"
+%p= t('projects.watchers')
+%ul
+  - @project.users.each do |watcher|
+    %li= watcher.email
+%p= link_to t('projects.add_user'), new_project_user_path(:project_id => @project.id)
 %p
   %b Issues:
   - @project.issues.each do |issue|

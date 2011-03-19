@@ -12,7 +12,7 @@ ExceptionerServer::Application.routes.draw do
   devise_for :users
 
   resources :projects do
-    resources :users, :controller => "project_user"
+    resources :users, :controller => "project_users"
   end
 
   resources :projects do

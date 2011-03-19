@@ -90,18 +90,16 @@ feature "Projects" do
       end
 
       scenario "owner should be able to add/remove watcher to/from the project" do
-        pending("will do it in a moment")
         @bob = @website.has(:user)
         @user.visit(project_path(@project))
         @user.should_see_translated('projects.add_user')
         @user.click_translated('projects.add_user')
         @user.should_see(@project.name)
-        @user.should_see_translated('user.email')
-        @user.fill_in("user_email", :with => @bob.email)
+        @user.should_see_translated('activerecord.attributes.user.email')
+        @user.fill_in("project_user_email", :with => @bob.email)
         @user.click_translated('projects.add_user')
         @user.should_see(@project.name, @bob.email)
         @user.should_see_translated('users.watchers')
-        @user.click(@bob.email)
       end
     end
   end

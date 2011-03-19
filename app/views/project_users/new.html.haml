@@ -1,0 +1,7 @@
+%p= @project.name
+%p= t('projects.add_user')
+
+= form_for @project_user do |f|
+  = f.label :email, t('activerecord.attributes.user.email')
+  = f.text_field :email
+  = f.submit t('projects.add_user')

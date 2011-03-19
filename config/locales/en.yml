@@ -20,6 +20,7 @@ en:
     delete: Delete
     save: Save project
     add_user: Add user
+    watchers: Watchers
     actions:
       destroy:
         successful: Project was successfully destroyed
@@ -32,6 +33,11 @@ en:
     new: New user
     watchers: Watchers
 
+  project_users:
+    actions:
+      add_user:
+        successful: User successfully added as a watcher
+        failed: Cannot add user as a watcher
   sign_in: Sign in
   sign_out: Sign out
   sign_up: Sign up
