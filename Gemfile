@@ -10,6 +10,7 @@ gem "compass", ">= 0.10.6"
 gem "html5-boilerplate", "0.3.0"
 gem "will_paginate", ">= 3.0.pre2"
 gem "devise", "~> 1.1"
+gem "cancan"
 gem "automatic_foreign_key"
 
 group :development, :test do

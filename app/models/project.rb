@@ -1,8 +1,9 @@
 require 'token_generator'
 
 class Project < ActiveRecord::Base
-  has_many :project_users, :dependent => :destroy
-  has_many :users, :through => :project_users
+  has_many :memberships, :dependent => :destroy
+  has_many :users, :through => :memberships
+  has_one :owner, :class_name => "User", :foreign_key => "owner_id"
   has_many :issues, :dependent => :destroy
 
   validates_presence_of :name, :api_token

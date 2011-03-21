@@ -47,7 +47,7 @@ en:
     new: New user
     watchers: Watchers
 
-  project_users:
+  memberships:
     actions:
       add_user:
         successful: User successfully added as a watcher

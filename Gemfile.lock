@@ -53,6 +53,7 @@ GEM
     babosa (0.2.2)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    cancan (1.6.2)
     capistrano (2.5.19)
       highline
       net-scp (>= 1.0.0)
@@ -193,6 +194,7 @@ PLATFORMS
 DEPENDENCIES
   automatic_foreign_key
   autotest-rails
+  cancan
   capistrano
   capybara!
   compass (>= 0.10.6)

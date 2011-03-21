@@ -2,11 +2,11 @@
 %p= t('activerecord.attributes.project.api_token')+" #{@project.api_token}"
 %p= t('projects.watchers')
 %ul
-  - @project.project_users.each do |project_user|
+  - @project.memberships.each do |membership|
     %li
-      = project_user.user.email
-      = link_to t('projects.remove_user'), project_user, :confirm => t('confirmations.delete'), :method => :delete
-%p= link_to t('projects.add_user'), new_project_user_path(:project_id => @project.id)
+      = membership.user.email
+      = link_to t('projects.remove_user'), membership, :confirm => t('confirmations.delete'), :method => :delete
+%p= link_to t('projects.add_user'), new_membership_path(:project_id => @project.id)
 %p
   %b= t('issues.all')
   - @project.issues.each do |issue|

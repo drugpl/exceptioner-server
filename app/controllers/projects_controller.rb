@@ -17,8 +17,8 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.new(params[:project])
     if @project.save
-      ProjectUser.create!(:user_id => current_user.id,
-                          :project_id => @project.id)
+      #Membership.create!(:user_id => current_user.id,
+      #                    :project_id => @project.id)
       redirect_to projects_path(current_user)
     else
       render :new

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :project_users
-  has_many :owned_project_users, :through => :projects
-  has_many :projects, :through => :project_users
+  has_many :memberships
+  has_many :projects, :through => :memberships
+  has_many :owned_projects, :class_name => "Project"
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable

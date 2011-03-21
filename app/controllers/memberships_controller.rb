@@ -1,11 +1,11 @@
-class ProjectUsersController < ApplicationController
+class MembershipsController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
-    @project_user = ProjectUser.new
+    @project_user = Membership.new
     @project_user.project_id = params[:project_id]
   end
   def create
-    @project_user = ProjectUser.new
+    @project_user = Membership.new
     @project_user.project_id = params[:project_id]
     user = User.find_by_email(params[:project_user][:email])
     @project_user.user_id = user.id if user
@@ -17,7 +17,7 @@ class ProjectUsersController < ApplicationController
     end
   end
   def destroy
-    @project_user = ProjectUser.where(:project_id => current_user.projects).find(params[:project_id])
+    @project_user = Membership.where(:project_id => current_user.projects).find(params[:project_id])
     @project = @project_user.project
     @project_user.destroy
     flash[:notice] = t('project_users.actions.remove_user.successful')

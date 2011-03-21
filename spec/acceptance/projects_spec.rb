@@ -84,8 +84,7 @@ feature "Projects" do
       @user.should_see_translated('projects.actions.destroy.failed')
     end
 
-
-    scenario "owner should be able to add/remove watcher to/from the project" do
+    scenario "owner should be able to add watcher to the project" do
       @bob = @website.has(:user)
       @user.visit(project_path(@project))
       @user.should_see_translated('projects.add_user')
